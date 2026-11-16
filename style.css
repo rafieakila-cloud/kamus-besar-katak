@@ -1,0 +1,126 @@
+/* ============================================
+   KAMUS BESAR KATAK — tema hijau kaca + animasi
+   ============================================ */
+:root {
+  --bg: #07150f;
+  --hero: #0c3b21;
+  --hero-2: #134e3a;
+  --hero-3: #0b3b4f;
+  --card: #0e241a;
+  --card-2: #122b20;
+  --line: rgba(167,243,208,.12);
+  --mint: #a7f3d0;
+  --green: #34d399;
+  --lime: #bef264;
+  --text: #e6f5ec;
+  --dim: #7d9f8e;
+  --gold: #fcd34d;
+  --radius: 18px;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { min-height: 100%; }
+body {
+  background: radial-gradient(800px 600px at 110% -10%, rgba(52,211,153,.13), transparent 50%), radial-gradient(600px 500px at -15% 40%, rgba(19,78,58,.25), transparent 60%), var(--bg);
+  color: var(--text);
+  font-family: Georgia, 'Palatino Linotype', serif;
+  font-size: 15px;
+  padding-bottom: 80px;
+}
+
+/* ---------- TOP BAR ---------- */
+.topbar {
+  background: linear-gradient(155deg, var(--hero) 0%, var(--hero-2) 50%, var(--hero-3) 100%);
+  padding: calc(16px + env(safe-area-inset-top)) 16px 18px;
+  border-bottom: 2px solid var(--lime);
+}
+.tb-inner { display: flex; align-items: center; gap: 12px; max-width: 860px; margin: 0 auto; }
+.tb-logo { width: 62px; height: 62px; flex-shrink: 0; background: var(--bg); border-radius: 16px; padding: 5px; border: 2px solid var(--lime); animation: logoFloat 3.5s ease-in-out infinite; }
+@keyframes logoFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.topbar h1 { font-size: 24px; font-weight: 800; color: var(--mint); }
+.topbar em { color: var(--lime); font-style: italic; }
+.tb-sub { color: #8ee2b8; font-size: 11px; margin-top: 2px; opacity: .85; }
+
+/* ---------- TABS ---------- */
+.tabs { display: flex; gap: 4px; overflow-x: auto; padding: 4px 10px; scrollbar-width: none; position: sticky; top: 0; z-index: 20; backdrop-filter: blur(10px); background: rgba(7,21,15,.88); border-bottom: 1px solid var(--line); }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { background: transparent; border: 1px solid transparent; color: var(--dim); border-radius: 999px; padding: 8px 16px; font-size: 12px; font-weight: 700; font-family: inherit; cursor: pointer; transition: .25s; }
+.tab.active { color: #052e16; background: linear-gradient(160deg, var(--mint), var(--green)); box-shadow: 0 3px 14px rgba(52,211,153,.35); }
+
+/* ---------- MAIN ---------- */
+main { max-width: 860px; margin: 0 auto; padding: 14px; }
+.panel { display: none; }
+.panel.active { display: block; animation: panelIn .35s ease; }
+@keyframes panelIn { from { opacity: 0; transform: translateY(14px); } }
+
+.status { color: var(--dim); font-size: 11px; font-style: italic; min-height: 16px; padding: 2px; }
+
+/* ---------- KAMUS ---------- */
+.searchbar { display: flex; align-items: center; gap: 8px; background: var(--card); border-radius: 999px; padding: 6px 6px 6px 14px; border: 2px solid transparent; transition: .2s; }
+.searchbar:focus-within { border-color: var(--green); box-shadow: 0 0 0 3px rgba(52,211,153,.2); }
+.s-ic { width: 19px; height: 19px; fill: var(--dim); flex-shrink: 0; }
+#dictInput { flex: 1; background: transparent; border: none; outline: none; font: inherit; color: var(--text); min-width: 0; }
+.go, .primary-btn { background: linear-gradient(160deg, var(--green), #16a34a); border: none; color: #052e16; font-weight: 800; border-radius: 999px; padding: 10px 22px; cursor: pointer; font-family: inherit; box-shadow: 0 4px 14px rgba(52,211,153,.35); transition: .15s; }
+.go:hover, .primary-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(52,211,153,.4); }
+
+.result-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; margin-top: 10px; animation: cardIn .3s ease both; box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+@keyframes cardIn { from { opacity: 0; transform: translateY(14px) scale(.97); } }
+.result-card h3 { color: var(--mint); font-size: 17px; margin-bottom: 6px; }
+.pos { display: inline-block; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--lime); background: rgba(190,242,100,.12); border: 1px solid rgba(190,242,100,.3); border-radius: 4px; padding: 3px 8px; margin-bottom: 8px; }
+.definition { color: #d5eadb; font-size: 14px; line-height: 1.65; margin-bottom: 8px; }
+.example { color: var(--dim); font-size: 12px; font-style: italic; margin-bottom: 8px; }
+.phonetic { color: var(--dim); font-family: Consolas, monospace; font-size: 12px; margin-bottom: 8px; }
+.link-wiki { color: var(--green); font-size: 11px; text-decoration: none; }
+.hint-card { margin-top: 14px; color: var(--dim); font-size: 12px; text-align: center; padding: 16px; border: 1px dashed var(--line); border-radius: var(--radius); }
+.hint-card b { color: var(--lime); }
+
+/* ---------- TERJEMAH ---------- */
+.translate-box { display: flex; flex-direction: column; gap: 10px; }
+.lang-row { display: flex; gap: 8px; align-items: center; }
+.lang-row select { flex: 1; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px; color: var(--text); font: inherit; outline: none; }
+.lang-row select:focus { border-color: var(--green); }
+#swapLang { background: var(--card-2); border: 1px solid var(--line); color: var(--lime); border-radius: 12px; padding: 10px 14px; font-size: 18px; cursor: pointer; transition: .3s; }
+#swapLang:hover { transform: rotate(180deg); }
+textarea { width: 100%; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; color: var(--text); font: inherit; font-size: 15px; outline: none; resize: vertical; font-family: inherit; }
+textarea:focus { border-color: var(--green); }
+.result-card { display: flex; flex-direction: column; gap: 8px; }
+.result-label { color: var(--dim); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
+.result-actions { display: flex; gap: 8px; }
+.ghost-btn { background: var(--card-2); border: 1px solid var(--line); color: var(--text); border-radius: 10px; padding: 8px 16px; cursor: pointer; font-family: inherit; transition: .2s; }
+.ghost-btn:hover { background: var(--card-solid, #1a3a2a); border-color: var(--green); }
+.history-list { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
+.hist-item { padding: 10px 12px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; font-size: 12px; display: flex; justify-content: space-between; gap: 8px; }
+.hist-item span { color: var(--dim); }
+
+/* ---------- DOKUMEN ---------- */
+.doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.doc-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 10px; text-align: center; cursor: pointer; transition: .2s; display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: inherit; color: var(--text); }
+.doc-card:hover { transform: translateY(-3px); border-color: var(--green); box-shadow: 0 8px 24px rgba(52,211,153,.15); }
+.doc-card svg { width: 38px; height: 38px; stroke: var(--green); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.doc-card span { font-size: 10.5px; line-height: 1.3; }
+.doc-article { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; animation: cardIn .35s ease both; }
+.doc-article h1, .doc-article h2 { color: var(--mint); margin: 14px 0 8px; font-size: 18px; }
+.doc-article p { color: #cfe8d6; line-height: 1.7; margin-bottom: 12px; font-size: 14px; }
+.doc-placeholder { color: var(--dim); font-style: italic; text-align: center; padding: 30px 10px; }
+
+/* ---------- QUR'AN ---------- */
+.quran-toolbar { display: flex; gap: 8px; margin-bottom: 10px; }
+.quran-toolbar select { flex: 1; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px; color: var(--text); font: inherit; outline: none; }
+.quran-content { display: flex; flex-direction: column; gap: 12px; }
+.ayah-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.ayah-num { display: inline-block; color: var(--gold); font-size: 11px; margin-bottom: 6px; }
+.ayah-ar { font-size: 21px; line-height: 2; color: #fef3c7; margin-bottom: 8px; font-family: 'Scheherazade New', Georgia, serif; direction: rtl; text-align: right; }
+.ayah-id { color: #cfe8d6; line-height: 1.65; font-size: 13px; }
+
+/* ---------- TENTANG ---------- */
+.about-card h2 { color: var(--mint); margin-bottom: 12px; }
+.about-card p, .about-card li { color: #cfe8d6; line-height: 1.6; margin-bottom: 8px; }
+.about-card ul { padding-left: 20px; }
+.about-foot { color: var(--dim); font-size: 11px; margin-top: 14px; }
+
+/* ---------- FOOTER ---------- */
+.foot { position: fixed; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: rgba(7,21,15,.9); backdrop-filter: blur(10px); border-top: 1px solid var(--line); font-size: 9px; color: var(--dim); z-index: 30; }
+.install { background: var(--lime); border: none; color: #1a2e05; font-weight: 800; border-radius: 999px; padding: 8px 18px; cursor: pointer; font-family: inherit; }
+.hidden { display: none !important; }
+.spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--dim); border-top-color: var(--green); border-radius: 50%; animation: spin .8s linear infinite; vertical-align: -2px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.errorbox { border: 1px solid rgba(248,113,113,.3); background: rgba(248,113,113,.08); color: #fca5a5; border-radius: 12px; padding: 12px 14px; font-size: 12px; margin-top: 10px; }

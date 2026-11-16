@@ -1,0 +1,16 @@
+{
+  "name": "Kamus Besar Katak",
+  "short_name": "KamusKatak",
+  "description": "Kamus, penerjemah, dokumen ilmu pengetahuan, dan terjemah Qur'an — legal & gratis.",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#07150f",
+  "theme_color": "#0c3b21",
+  "lang": "id",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
