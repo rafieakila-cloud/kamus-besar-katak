@@ -3,108 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0c3b21">
-<meta name="description" content="Kamus Besar Katak — kamus, penerjemah, dokumen ilmu pengetahuan lengkap: IPA, IPS, Matematika, Qur'an, Hadits, bahasa Indonesia/Inggris/Arab/Jawa/Spanyol/Yunani/Batak, dan lainnya.">
-<title>Kamus Besar Katak</title>
+<meta name="theme-color" content="#241509">
+<meta name="description" content="Kamus Besar Katak — Perpustakaan & kamus lengkap: ilmu pengetahuan, bahasa, agama, terjemah, dan Qur'an. Sumber legal Wikipedia/Wiktionary/Kemenag.">
+<title>Kamus Besar Katak — Perpustakaan</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- TOP BAR -->
-  <header class="topbar">
-    <div class="tb-inner">
-      <img class="tb-logo" src="icons/icon.svg" alt="Kamus Besar Katak">
-      <div>
-        <h1>Kamus Besar <em>Katak</em></h1>
-        <p class="tb-sub">kamus · terjemah · dokumen ilmu</p>
+  <!-- Lempengan kayu / judul -->
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="brand-block">
+        <img class="brand-seal" src="icons/icon.svg" alt="Kamus Besar Katak">
+        <div class="brand-text">
+          <div class="gov-line">REPUBLIK INDONESIA · PERPUSTAKAAN DIGITAL</div>
+          <h1>Kamus Besar <em>Katak</em></h1>
+          <div class="tagline">Ilmu untuk semua — terbuka, legal, gratis</div>
+        </div>
       </div>
+      <div class="est">EST. 2026</div>
     </div>
+    <div class="ornament"><span></span><span>•</span><span></span></div>
   </header>
 
-  <!-- NAV -->
+  <!-- NAVIGATION -->
   <nav class="tabs" role="tablist">
-    <button class="tab active" data-tab="kamus" role="tab">Kamus</button>
-    <button class="tab" data-tab="terjemah" role="tab">Terjemah</button>
-    <button class="tab" data-tab="dokumen" role="tab">Dokumen</button>
+    <button class="tab active" data-tab="kamus" role="tab">Kamus / KBBI</button>
+    <button class="tab" data-tab="dokumen" role="tab">Arsip Ilmu</button>
+    <button class="tab" data-tab="terjemah" role="tab">Penerjemah</button>
     <button class="tab" data-tab="quran" role="tab">Qur'an</button>
     <button class="tab" data-tab="tentang" role="tab">Tentang</button>
   </nav>
 
-  <!-- PANELS -->
   <main>
     <!-- KAMUS -->
     <section id="panel-kamus" class="panel active">
-      <div class="searchbar">
+      <div class="shelf-label">KAMUS BESAR — KBBI &amp; ASING</div>
+      <div class="kamus-search">
         <svg viewBox="0 0 24 24" class="s-ic"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-1.39 1.39l.27.27v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
-        <input id="dictInput" type="text" placeholder="Cari kata (Indonesia / Inggris / Jawa…)" autocomplete="off" enterkeyhint="search">
-        <button id="dictGo" class="go">Cari</button>
+        <input id="dictInput" type="text" placeholder="Cari kata baku… (mis. “katak”)" autocomplete="off" enterkeyhint="search" spellcheck="false">
+        <button id="dictGo" class="btn btn-search">Cari</button>
       </div>
       <div id="dictStatus" class="status"></div>
       <div id="dictResults"></div>
-      <div class="hint-card" id="dictHint">Ketik kata lalu tekan Cari/Enter. Contoh: <b>katak</b> — coba juga: <b>rumah, sekolah, bahasa, ilmu</b></div>
+      <div class="hint-paper" id="dictHint">Kamus menampilkan lema, IPA, kelas kata, nomor definisi, dan contoh — format KBBI. Sumber: Wiktionary (CC BY-SA).</div>
+    </section>
+
+    <!-- DOKUMEN / ARSIP -->
+    <section id="panel-dokumen" class="panel">
+      <div class="shelf-label">ARSIP DIGITAL — ILMU PENGETAHUAN</div>
+      <div class="doc-shelf" id="docGrid"></div>
+      <div id="docStatus" class="status"></div>
+      <!-- book viewer -->
+      <div id="reader" class="hidden">
+        <div class="reader-bar">
+          <button id="readerClose" class="btn btn-small">← Rak Buku</button>
+          <span id="readerTitle"></span>
+          <button id="readerNext" class="btn btn-small">Berikutnya →</button>
+        </div>
+        <div class="book">
+          <div class="book-page left"></div>
+          <div class="book-page right" id="readerBody"></div>
+        </div>
+      </div>
     </section>
 
     <!-- TERJEMAH -->
     <section id="panel-terjemah" class="panel">
-      <div class="translate-box">
+      <div class="shelf-label">PENERJEMAH — TERBUKA &amp; LEGAL</div>
+      <div class="translate-sheet">
         <div class="lang-row">
           <select id="fromLang"></select>
-          <button id="swapLang" title="Tukar bahasa">⇄</button>
+          <button id="swapLang" class="btn btn-small" title="Tukar">⇄</button>
           <select id="toLang"></select>
         </div>
-        <textarea id="fromText" placeholder="Ketik teks di sini…" rows="3"></textarea>
-        <button id="translateBtn" class="primary-btn">Terjemahkan</button>
-        <div class="result-card">
-          <div class="result-label">Hasil</div>
-          <textarea id="toText" placeholder="Hasil terjemahan muncul di sini…" rows="3" readonly></textarea>
+        <textarea id="fromText" placeholder="Ketik teks dalam bahasa sumber…" rows="4"></textarea>
+        <button id="translateBtn" class="btn btn-primary">Terjemahkan</button>
+        <div class="result-box">
+          <div class="result-label">Hasil Terjemahan</div>
+          <div class="result-text" id="toText"></div>
           <div class="result-actions">
-            <button id="copyResult" class="ghost-btn">Salin</button>
-            <button id="speakResult" class="ghost-btn">🔊 Dengarkan</button>
+            <button id="copyResult" class="btn btn-ghost">Salin</button>
+            <button id="speakResult" class="btn btn-ghost">🔊 Dengarkan</button>
           </div>
         </div>
       </div>
-      <div id="translateHistory" class="history-list"></div>
-    </section>
-
-    <!-- DOKUMEN -->
-    <section id="panel-dokumen" class="panel">
-      <div class="doc-grid" id="docGrid"></div>
-      <div id="docStatus" class="status"></div>
-      <article id="docContent" class="doc-article">
-        <div class="doc-placeholder">Pilih subjek di atas — artikel dimuat dari Wikipedia (CC BY-SA), tersimpan otomatis di HP untuk dibaca offline.</div>
-      </article>
+      <div id="translateHistory" class="history-tape"></div>
     </section>
 
     <!-- QUR'AN -->
     <section id="panel-quran" class="panel">
+      <div class="shelf-label">AL-QUR'AN AL-KARIM — TEKS &amp; TERJEMAH</div>
       <div class="quran-toolbar">
         <select id="surahSelect"></select>
-        <button id="loadSurahBtn" class="primary-btn">Buka Surat</button>
+        <button id="loadSurahBtn" class="btn btn-primary">Buka</button>
       </div>
       <div id="quranStatus" class="status"></div>
-      <div id="quranContent" class="quran-content"></div>
+      <div id="quranContent" class="quran-paper"></div>
     </section>
 
     <!-- TENTANG -->
     <section id="panel-tentang" class="panel">
-      <div class="card about-card">
+      <div class="shelf-label">TENTANG PERPUSTAKAAN</div>
+      <div class="about-card">
         <h2>Tentang Kamus Besar Katak</h2>
-        <p>Aplikasi pendidikan bebas &amp; legal, dibuat untuk anak sekolah Indonesia. Semua konten bersumber dari layanan terbuka/berlisensi bebas:</p>
+        <p>Perpustakaan digital terbuka untuk pelajar &amp; masyarakat — dibangun dengan semangat Ipusnas + Wikipedia + archive.org.</p>
         <ul>
-          <li><b>Wiktionary</b> &amp; <b>Wikipedia</b> — CC BY-SA 3.0/4.0</li>
-          <li><b>MyMemory Translate</b> — terjemahan open, tanpa API key</li>
-          <li><b>Al-Quran Cloud</b> — teks &amp; terjemah Qur'an gratis</li>
-          <li>Konten agama lain (Hadits, Aqidah) diambil dari sumber publik bebas (Wikisource)</li>
+          <li><b>KBBI &amp; Kamus</b> — Wiktionary (CC BY-SA)</li>
+          <li><b>Arsip Ilmu</b> — artikel Wikipedia (CC BY-SA), diformat layaknya koleksi arsip</li>
+          <li><b>Penerjemah</b> — MyMemory / Google (gratis, tanpa kunci)</li>
+          <li><b>Al-Qur'an</b> — teks Uthmani + Terjemah Kementerian Agama RI</li>
         </ul>
-        <p class="about-foot">Kamus Besar Katak · PreOnView · 100% offline-first setelah first load</p>
+        <p>Aplikasi dapat dipakai bebas secara offline setelah kunjungan pertama. Atribusi sumber tertera pada setiap halaman.</p>
+        <p class="foot-note">Kamus Besar Katak · PreOnView · 2026</p>
       </div>
     </section>
   </main>
 
   <footer class="foot">
-    <span>Kamus Besar Katak — terbuka · gratis · legal</span>
-    <button id="installBtn" class="install hidden">Install</button>
+    <span>Kamus Besar Katak — perpustakaan terbuka</span>
+    <button id="installBtn" class="btn btn-gold hidden">Install</button>
   </footer>
 
 <script src="app.js"></script>
